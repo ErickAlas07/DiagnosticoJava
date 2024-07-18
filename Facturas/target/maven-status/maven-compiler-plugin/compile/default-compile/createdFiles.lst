@@ -1,0 +1,5 @@
+test\ventas\Ventas.class
+ventas\Producto.class
+ventas\Orden.class
+ventas\TipoPago.class
+ventas\Cliente.class
