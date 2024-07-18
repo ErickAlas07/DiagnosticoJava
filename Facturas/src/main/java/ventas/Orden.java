@@ -26,11 +26,17 @@ public class Orden {
     }
 
     public void agregarProducto(Producto producto) {
-        if (contadorProductos > MAX_PRODUCTOS) {
-            System.out.println("Producto no agregado, supera el máximo de productos permitidos (10).");
-        } else {
-            System.out.println("Producto agregado correctamente.");
-            this.productos[contadorProductos++] = producto;
+        try {
+            if (contadorProductos >= MAX_PRODUCTOS) {
+                throw new ArrayIndexOutOfBoundsException("Producto no agregado, supera el máximo de productos permitidos (" + MAX_PRODUCTOS + ").");
+            } else {
+                //Agregar producto si hay espacio disponible.
+                this.productos[contadorProductos++] = producto;
+                System.out.println("Producto agregado correctamente.");
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            //Manejo de la excepción
+            System.out.println(e.getMessage());
         }
     }
 
@@ -52,6 +58,7 @@ public class Orden {
         System.out.println("Cliente: " + cliente);
         System.out.println("\nProductos de la Orden:\n");
 
+        //Imprimir cada uno de los productos (nombre y precio)
         for (int i = 0; i < contadorProductos; i++) {
             System.out.println((i + 1) + ". " + productos[i].getNombreProducto() + " - $" + productos[i].getPrecio());
         }
